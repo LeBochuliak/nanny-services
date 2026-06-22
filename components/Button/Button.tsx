@@ -1,9 +1,10 @@
 import css from "./Button.module.css";
 import clsx from "clsx";
+import type { ReactNode } from "react";
 
 interface ButtonProps {
-  children: string;
-  style?: "primary" | "secondary" | "header";
+  children: ReactNode;
+  style?: "primary" | "secondary" | "header" | "auth";
   home?: boolean;
 }
 

@@ -12,15 +12,22 @@ const Home = () => {
             Find Babysitters Online for All Occasions
           </span>
         </h1>
-        <Button type={"primary"} home>
-          Get started
+        <Button style={"primary"} home>
+          Get started{" "}
+          <svg width="16" height="16" className={css.arrow}>
+            <use href="/sprite.svg#icon-arrow" />
+          </svg>
         </Button>
       </div>
       <div className={css.imageContainer}>
         <Image src="/heroImage.jpg" alt="baby" fill className={css.image} />
       </div>
       <div className={css.ads}>
-        <div className={css.adsIcon}></div>
+        <div className={css.adsIcon}>
+          <svg width="30" height="30" className={css.check}>
+            <use href="/sprite.svg#icon-check" />
+          </svg>
+        </div>
         <p>
           Experienced nannies
           <br />

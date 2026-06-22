@@ -17,7 +17,7 @@
 }
 .home {
     font-size: 20px;
-    padding: 18px 50px;
+    padding: 18px;
     width: 230px;
     height: 60px;
 }
@@ -31,4 +31,9 @@
     padding: 14px 40px;
     color: #000000;
     
+}
+.auth {
+    background-color: #103931;
+    padding: 16px;
+    width: 100%;
 }

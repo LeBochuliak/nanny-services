@@ -21,13 +21,25 @@ const Header = () => {
         <Link href="/nannies" className={css.navLink}>
           Nannies
         </Link>
-        <div className={css.authContainer}>
+        <div className={css.authActions}>
           <Button style="primary">Log In</Button>
           {pathname === "/" ? (
             <Button style="secondary">Registration</Button>
           ) : (
             <Button style="header">Registration</Button>
           )}
+        </div>
+        <div className={css.userActions}>
+          <Link href="/nannies" className={css.navLink}>
+            Favorites
+          </Link>
+          <Link href="/profile" className={css.avatarLink}>
+            <svg width="40" height="40" className={css.avatar}>
+              <use href="/sprite.svg#icon-image" />
+            </svg>
+            <p>Ilona</p>
+          </Link>
+          <Button style="primary">Log out</Button>
         </div>
       </nav>
     </header>

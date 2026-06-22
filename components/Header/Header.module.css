@@ -4,6 +4,7 @@
     padding-top: 20px;
     padding-bottom: 20px;
     padding-left: 128px;
+    min-width: 980px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -43,9 +44,33 @@
     color: #fbfbfb;
 }
 
-.authContainer {
+.authActions {
     margin-right: 128px;
     margin-left: 52px;
     display: flex;
     gap: 8px;
+    display: none;
+}
+.userActions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-right: 128px;
+}
+.avatarLink {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    margin-right: 24px;
+    margin-left: 24px;
+}
+.avatarLink p {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 111%;
+    letter-spacing: -0.01em;
+    color: #fbfbfb;
+
 }

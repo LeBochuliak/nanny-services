@@ -7,9 +7,15 @@ const Card = () => {
     <div className={css.cardContainer}>
       <ul className={css.infoAddList}>
         <li className={css.infoAddListItem}>
+          <svg width="16" height="16">
+            <use href="/sprite.svg#icon-map-pin" />
+          </svg>
           <p>Kyiv, Ukraine</p>
         </li>
         <li className={css.infoAddListItem}>
+          <svg width="16" height="16">
+            <use href="/sprite.svg#icon-star" />
+          </svg>
           <p>Rating: 4.5</p>
         </li>
         <li className={css.infoAddListItem}>
@@ -18,7 +24,11 @@ const Card = () => {
           </p>
         </li>
       </ul>
-      <button className={css.likeBtn}>@</button>
+      <button className={css.likeBtn}>
+        <svg width="26" height="26" className={css.heart}>
+          <use href="/sprite.svg#icon-heart" />
+        </svg>
+      </button>
 
       <div className={css.imageWrap}>
         <Image
@@ -76,7 +86,12 @@ const Card = () => {
             </div>
             <div className={css.commentNameWrap}>
               <p className={css.commentName}>Olga K.</p>
-              <p className={css.commentRate}>5.0</p>
+              <p className={css.commentRate}>
+                <svg width="16" height="16">
+                  <use href="/sprite.svg#icon-star" />
+                </svg>
+                5.0
+              </p>
             </div>
             <p className={css.commentDescription}>
               Anna is wonderful! My kids loved her and she was always punctual.
@@ -88,7 +103,13 @@ const Card = () => {
             </div>
             <div className={css.commentNameWrap}>
               <p className={css.commentName}>Olga K.</p>
-              <p className={css.commentRate}>5.0</p>
+
+              <p className={css.commentRate}>
+                <svg width="16" height="16">
+                  <use href="/sprite.svg#icon-star" />
+                </svg>
+                5.0
+              </p>
             </div>
 
             <p className={css.commentDescription}>

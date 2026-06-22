@@ -53,6 +53,9 @@
     border-radius: 13px;
     width: 54px;
     height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .ads p {
     font-weight: 400;
@@ -66,4 +69,7 @@
     line-height: 150%;
     color: #11101c;
 
+}
+.arrow {
+    margin-left: 16px;
 }
