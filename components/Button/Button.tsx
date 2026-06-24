@@ -6,6 +6,7 @@ interface ButtonProps {
   children: ReactNode;
   style?: "primary" | "secondary" | "header" | "auth";
   home?: boolean;
+  type?: "submit" | "button";
 }
 
 const Button = ({ children, style, home }: ButtonProps) => {

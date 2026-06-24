@@ -185,3 +185,10 @@
     width: 26px;
     height: 26px;
 }
+ .heart {
+    stroke: #11101c;
+    fill: transparent;
+}
+ .heart:active {
+    fill: #11101c;
+ }

@@ -1,0 +1,90 @@
+.form {
+    width: 472px;
+}
+
+.title {
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 120%;
+    letter-spacing: -0.02em;
+    color: #11101c;
+    margin-bottom: 20px;}
+
+.description {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 125%;
+    color: rgba(17, 16, 28, 0.5);
+    margin-bottom: 32px;
+}
+
+
+.nannyInfo {
+    display: flex;
+    flex-direction: row;
+    gap: 14px;
+    margin-bottom: 32px;
+}
+.nannyImage {
+    border-radius: 15px;
+    width: 44px;
+    height: 44px;
+}
+
+.nannyLabel {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 133%;
+    color: #8a8a89;
+}
+
+.nannyName {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: #11101c;
+}
+
+.input {
+    border: 1px solid rgba(17, 16, 28, 0.1);
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 125%;
+    color: #11101c;
+    width: 100%;
+    margin-bottom: 12px;
+}
+.input::placeholder {
+    color: #11101c;
+}
+.inputShort:nth-of-type(2) {
+    margin-left: 8px;
+}
+
+.inputShort {
+    width: 232px;
+}
+.commentInput {
+    min-height: 116px;
+    margin-bottom: 40px;
+    resize: none;
+}
+:global(.react-datepicker) {
+    font-family: inherit !important;
+    border: none !important;
+    box-shadow: 0 20px 69px 0 rgba(0, 0, 0, 0.1);
+    border-radius: 16px !important;
+    overflow: hidden !important;
+}
+:global(.react-datepicker__header) {
+    border: none !important;
+    padding: 12px 0 !important;
+}
+:global(.react-datepicker__time-container) {
+    border: none !important;
+}
+:global(.react-datepicker-wrapper) {
+    margin-left: 8px;
+}
