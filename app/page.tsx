@@ -1,8 +1,13 @@
+"use client";
+
 import css from "@/components/Home/Home.module.css";
 import Image from "next/image";
 import Button from "@/components/Button/Button";
+import { useRouter } from "next/navigation";
 
 const Home = () => {
+  const router = useRouter();
+
   return (
     <div className={css.heroContainer}>
       <div className={css.titleContainer}>
@@ -12,7 +17,12 @@ const Home = () => {
             Find Babysitters Online for All Occasions
           </span>
         </h1>
-        <Button style={"primary"} home>
+        <Button
+          style="primary"
+          type="button"
+          onClick={() => router.push("/nannies")}
+          home
+        >
           Get started{" "}
           <svg width="16" height="16" className={css.arrow}>
             <use href="/sprite.svg#icon-arrow" />

@@ -1,8 +1,19 @@
+"use client";
+
 import css from "./Card.module.css";
 import Image from "next/image";
 import Button from "@/components/Button/Button";
+import Modal from "@/components/Modal/Modal";
+import AppointmentForm from "@/components/AppointmentForm/AppointmentForm";
+import { useState } from "react";
 
 const Card = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <div className={css.cardContainer}>
       <ul className={css.infoAddList}>
@@ -117,7 +128,14 @@ const Card = () => {
             </p>
           </li>
         </ul>
-        <Button style="secondary">Make an appointment</Button>
+        <Button type="button" style="secondary" onClick={openModal}>
+          Make an appointment
+        </Button>
+        {isModalOpen && (
+          <Modal onClose={closeModal}>
+            <AppointmentForm />
+          </Modal>
+        )}
       </div>
     </div>
   );

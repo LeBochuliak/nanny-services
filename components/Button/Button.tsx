@@ -7,11 +7,16 @@ interface ButtonProps {
   style?: "primary" | "secondary" | "header" | "auth";
   home?: boolean;
   type?: "submit" | "button";
+  onClick: () => void;
 }
 
-const Button = ({ children, style, home }: ButtonProps) => {
+const Button = ({ children, style, home, type, onClick }: ButtonProps) => {
   return (
-    <button className={clsx(css.btn, style && css[style], home && css.home)}>
+    <button
+      type={type}
+      onClick={onClick}
+      className={clsx(css.btn, style && css[style], home && css.home)}
+    >
       {children}
     </button>
   );

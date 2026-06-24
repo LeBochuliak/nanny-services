@@ -5,6 +5,7 @@ import Link from "next/link";
 import Button from "@/components/Button/Button";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import AuthNavigation from "@/components/AuthNavigation/AuthNavigation";
 
 const Header = () => {
   const pathname = usePathname();
@@ -21,14 +22,7 @@ const Header = () => {
         <Link href="/nannies" className={css.navLink}>
           Nannies
         </Link>
-        <div className={css.authActions}>
-          <Button style="primary">Log In</Button>
-          {pathname === "/" ? (
-            <Button style="secondary">Registration</Button>
-          ) : (
-            <Button style="header">Registration</Button>
-          )}
-        </div>
+        <AuthNavigation />
         <div className={css.userActions}>
           <Link href="/nannies" className={css.navLink}>
             Favorites
@@ -39,7 +33,9 @@ const Header = () => {
             </svg>
             <p>Ilona</p>
           </Link>
-          <Button style="primary">Log out</Button>
+          <Button type="button" style="primary" onClick={() => 1 + 1}>
+            Log out
+          </Button>
         </div>
       </nav>
     </header>

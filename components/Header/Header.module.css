@@ -44,19 +44,13 @@
     color: #fbfbfb;
 }
 
-.authActions {
-    margin-right: 128px;
-    margin-left: 52px;
-    display: flex;
-    gap: 8px;
-    display: none;
-}
 .userActions {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     margin-right: 128px;
+    display: none;
 }
 .avatarLink {
     display: flex;
