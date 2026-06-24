@@ -13,7 +13,21 @@
 .primary {
     background-color: transparent;
     border: 1px solid rgba(251, 251, 251, 0.4);
-    padding: 13.5px 40px;
+    padding: 14px 40px;
+}
+.primary:hover,  
+.primary:focus,
+.home:hover,
+.home:focus {
+    background-color: rgba(251, 251, 251, 0.4);
+    color: #000000;
+}
+.primary:active,
+.home:active,
+.secondary:active,
+.header:active {
+    background-color: rgba(251, 251, 251);
+    color: #000000;
 }
 .home {
     font-size: 20px;
@@ -25,6 +39,16 @@
 .secondary {
     background-color: #103931;
     padding: 14px 40px;
+    border: 1px solid transparent;
+}
+.secondary:hover,
+.secondary:focus,
+.auth:hover,
+.auth:focus {
+    background-color: rgba(251, 251, 251);
+    color: #000000;
+    border: 1px solid #103931;
+
 }
 .header {
     background-color: rgba(251, 251, 251, 0.5);
@@ -32,8 +56,14 @@
     color: #000000;
     
 }
+.header:hover,
+.header:focus {
+    background-color: rgba(251, 251, 251, 0.8);
+    
+}
 .auth {
     background-color: #103931;
     padding: 16px;
     width: 100%;
+    border: 1px solid transparent;
 }
