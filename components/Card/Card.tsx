@@ -15,6 +15,7 @@ interface CardProps {
 
 const Card = ({ nanny }: CardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showReviews, setShowReviews] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
 
@@ -106,16 +107,28 @@ const Card = ({ nanny }: CardProps) => {
           </li>
         </ul>
         <p className={css.description}>{nanny.about}</p>
-        <button className={css.btnMore}>Read more</button>
-
-        {nanny.reviews?.length > 0 ? (
-          <ReviewsList nanny={nanny} />
-        ) : (
-          <p className={css.description}>There are no reviews yet</p>
+        {!showReviews && (
+          <button
+            type="button"
+            className={css.btnMore}
+            onClick={() => setShowReviews(true)}
+          >
+            Read more
+          </button>
         )}
-        <Button type="button" style="secondary" onClick={openModal}>
-          Make an appointment
-        </Button>
+        {showReviews && (
+          <>
+            {nanny.reviews?.length ? (
+              <ReviewsList nanny={nanny} />
+            ) : (
+              <p className={css.description}>There are no reviews yet.</p>
+            )}
+            <Button type="button" style="secondary" onClick={openModal}>
+              Make an appointment
+            </Button>
+          </>
+        )}
+
         {isModalOpen && (
           <Modal onClose={closeModal}>
             <AppointmentForm />

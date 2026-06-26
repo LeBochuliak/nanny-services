@@ -1,16 +1,25 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
+import { getAuth } from "firebase/auth";
+
+const apiKey = process.env.REACT_APP_FIREBASE_API_KEY;
+const messagingSenderId = process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID;
+const appId = process.env.REACT_APP_FIREBASE_APP_ID;
+const databaseURL = process.env.REACT_APP_DATABASE_URL;
+const authDomain = process.env.REACT_APP_FIREBASE_AUTH_DOMAIN;
+const projectId = process.env.REACT_APP_FIREBASE_PROJECT_ID;
+const storageBucket = process.env.REACT_APP_FIREBASE_STORAGE_BUCKET;
+const measurementId = process.env.REACT_APP_FIREBASE_MEASUREMENT_ID;
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBSACPkOxwoaBHcNswr0Nx-Q1-u7v_Y8Q4",
-  authDomain: "nanny-services-32bbc.firebaseapp.com",
-  projectId: "nanny-services-32bbc",
-  storageBucket: "nanny-services-32bbc.firebasestorage.app",
-  messagingSenderId: "380453834285",
-  appId: "1:380453834285:web:9ca05528eff07699d472a4",
-  measurementId: "G-ZBELMH8GTB",
-  databaseURL:
-  "https://nanny-services-32bbc-default-rtdb.europe-west1.firebasedatabase.app",
+  apiKey: apiKey,
+  authDomain: authDomain,
+  projectId: projectId,
+  storageBucket: storageBucket,
+  messagingSenderId: messagingSenderId,
+  appId: appId,
+  measurementId: measurementId,
+  databaseURL: databaseURL
 };
 
 export const app =
@@ -21,4 +30,5 @@ export const app =
 
 
 export const db = getDatabase(app);    
+export const auth = getAuth(app);
 
