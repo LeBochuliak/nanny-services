@@ -6,13 +6,37 @@ import Button from "@/components/Button/Button";
 import Modal from "@/components/Modal/Modal";
 import AppointmentForm from "@/components/AppointmentForm/AppointmentForm";
 import { useState } from "react";
+import type { Nanny } from "@/types/types";
+import ReviewsList from "@/components/ReviewsList/ReviewsList";
 
-const Card = () => {
+interface CardProps {
+  nanny: Nanny;
+}
+
+const Card = ({ nanny }: CardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
 
   const closeModal = () => setIsModalOpen(false);
+
+  function calculateAge(birthday: string): number {
+    const birthDate = new Date(birthday);
+    const today = new Date();
+
+    let age = today.getFullYear() - birthDate.getFullYear();
+
+    const monthDiff = today.getMonth() - birthDate.getMonth();
+
+    if (
+      monthDiff < 0 ||
+      (monthDiff === 0 && today.getDate() < birthDate.getDate())
+    ) {
+      age--;
+    }
+
+    return age;
+  }
 
   return (
     <div className={css.cardContainer}>
@@ -21,17 +45,17 @@ const Card = () => {
           <svg width="16" height="16">
             <use href="/sprite.svg#icon-map-pin" />
           </svg>
-          <p>Kyiv, Ukraine</p>
+          <p>{nanny.location}</p>
         </li>
         <li className={css.infoAddListItem}>
           <svg width="16" height="16">
             <use href="/sprite.svg#icon-star" />
           </svg>
-          <p>Rating: 4.5</p>
+          <p>{nanny.rating}</p>
         </li>
         <li className={css.infoAddListItem}>
           <p>
-            Price / 1 hour: <span>15$</span>
+            Price / 1 hour: <span>{nanny.price_per_hour}$</span>
           </p>
         </li>
       </ul>
@@ -43,7 +67,7 @@ const Card = () => {
 
       <div className={css.imageWrap}>
         <Image
-          src="/heroImage.jpg"
+          src={nanny.avatar_url}
           alt="nanny"
           width={96}
           height={96}
@@ -53,81 +77,42 @@ const Card = () => {
 
       <div className={css.infoWrap}>
         <p className={css.nanny}>Nanny</p>
-        <h3 className={css.name}>Anna Shevchenko</h3>
+        <h3 className={css.name}>{nanny.name}</h3>
         <ul className={css.listInfo}>
           <li className={css.listInfoItem}>
             <p>
-              Age: <span>27</span>
+              Age: <span>{calculateAge(nanny.birthday)}</span>
             </p>
           </li>
           <li className={css.listInfoItem}>
             <p>
-              Experience: <span>5 years</span>
+              Experience: <span>{nanny.experience}</span>
             </p>
           </li>
           <li className={css.listInfoItem}>
             <p>
-              Kids Age: <span>1 to 6 years old</span>
+              Kids Age: <span>{nanny.kids_age}</span>
             </p>
           </li>
           <li className={css.listInfoItem}>
             <p>
-              Characters: <span>Patient, Energetic, Creative, Punctual</span>
+              Characters: <span>{nanny.characters?.join(", ")}</span>
             </p>
           </li>
           <li className={css.listInfoItem}>
             <p>
-              Education:{" "}
-              <span>
-                Bachelor in Early Childhood Education, First Aid Certified
-              </span>
+              Education: <span>{nanny.education}</span>
             </p>
           </li>
         </ul>
-        <p className={css.description}>
-          I love children and have been working with them for over 5 years. I
-          believe in creating a positive and nurturing environment for kids. I
-          also love outdoor activities and crafts.
-        </p>
+        <p className={css.description}>{nanny.about}</p>
         <button className={css.btnMore}>Read more</button>
-        <ul className={css.commentsList}>
-          <li className={css.commentsListItem}>
-            <div className={css.commentAvatar}>
-              <p>O</p>
-            </div>
-            <div className={css.commentNameWrap}>
-              <p className={css.commentName}>Olga K.</p>
-              <p className={css.commentRate}>
-                <svg width="16" height="16">
-                  <use href="/sprite.svg#icon-star" />
-                </svg>
-                5.0
-              </p>
-            </div>
-            <p className={css.commentDescription}>
-              Anna is wonderful! My kids loved her and she was always punctual.
-            </p>
-          </li>
-          <li className={css.commentsListItem}>
-            <div className={css.commentAvatar}>
-              <p>O</p>
-            </div>
-            <div className={css.commentNameWrap}>
-              <p className={css.commentName}>Olga K.</p>
 
-              <p className={css.commentRate}>
-                <svg width="16" height="16">
-                  <use href="/sprite.svg#icon-star" />
-                </svg>
-                5.0
-              </p>
-            </div>
-
-            <p className={css.commentDescription}>
-              Anna is wonderful! My kids loved her and she was always punctual.
-            </p>
-          </li>
-        </ul>
+        {nanny.reviews?.length > 0 ? (
+          <ReviewsList nanny={nanny} />
+        ) : (
+          <p className={css.description}>There are no reviews yet</p>
+        )}
         <Button type="button" style="secondary" onClick={openModal}>
           Make an appointment
         </Button>

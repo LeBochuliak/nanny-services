@@ -1,0 +1,8 @@
+ .commentsList {
+     display: flex;
+     flex-direction: column;
+     width: 480px;
+     gap: 24px;
+     margin-bottom: 48px;
+     margin-top: 48px;
+ }

@@ -1,0 +1,58 @@
+
+
+.commentsListItem {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.commentAvatar {
+    border-radius: 100px;
+    width: 44px;
+    height: 44px;
+    background: rgba(16, 57, 49, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 12px;
+    margin-bottom: 16px;
+}
+
+.commentAvatar p {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 100%;
+    color: #103931;
+
+}
+
+.commentNameWrap {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.commentName {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 125%;
+    color: #11101c;
+    margin-bottom: 4px;
+}
+
+.commentRate {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 129%;
+    color: #11101c;
+    display: flex;
+    gap: 8px;
+}
+
+.commentDescription {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 125%;
+    color: rgba(17, 16, 28, 0.5);
+
+}
