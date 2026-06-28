@@ -6,8 +6,6 @@ import { getNannies } from "@/services/nannies";
 const Nannies = async () => {
   const nannies = await getNannies();
 
-  console.log(nannies[1]);
-
   return (
     <div className="container">
       <Filter />

@@ -7,6 +7,7 @@ import LoginForm from "@/components/LoginForm/LoginForm";
 import RegistrationForm from "@/components/RegistrationForm/RegistrationForm";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { registration } from "@/services/auth";
 
 const AuthNavigation = () => {
   const pathname = usePathname();
@@ -42,7 +43,11 @@ const AuthNavigation = () => {
       )}
       {modalType && (
         <Modal onClose={() => setModalType(null)}>
-          {modalType === "login" ? <LoginForm /> : <RegistrationForm />}
+          {modalType === "login" ? (
+            <LoginForm />
+          ) : (
+            <RegistrationForm registration={registration} />
+          )}
         </Modal>
       )}
     </div>

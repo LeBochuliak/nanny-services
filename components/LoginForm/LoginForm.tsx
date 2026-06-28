@@ -15,7 +15,7 @@ const LoginForm = () => {
       </label>
       <input
         type="email"
-        name="email"
+        id="email"
         autoComplete="email"
         placeholder="Email"
         required
@@ -27,7 +27,7 @@ const LoginForm = () => {
       </label>
       <input
         type="text"
-        name="password"
+        id="password"
         placeholder="Password"
         required
         minLength={3}

@@ -7,7 +7,7 @@ interface ButtonProps {
   style?: "primary" | "secondary" | "header" | "auth";
   home?: boolean;
   type?: "submit" | "button";
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const Button = ({ children, style, home, type, onClick }: ButtonProps) => {

@@ -20,3 +20,14 @@ export interface Nanny {
   reviews: Review[];
 }
 
+export interface RegistrationData {
+  username: string;
+  email: string;
+  password: string;
+}
+
+export interface User {
+  username: string;
+  email: string;
+  password: string;
+}
