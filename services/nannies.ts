@@ -4,7 +4,7 @@ import { get, ref } from "firebase/database";
 import { Nanny } from "@/types/types";
 
 export async function getNannies() {
-  const snapshot = await get(ref(db));
+  const snapshot = await get(ref(db, "nannies"));;
 
   if (!snapshot.exists()) {
     return [];
@@ -12,8 +12,7 @@ export async function getNannies() {
 
   const data = snapshot.val();
 
-  return Object.entries(data).map(([id, nanny]) => ({
-    id,
-    ...(nanny as Omit<Nanny, "id">),
-  }));
+
+  return Object.values(data) as Nanny[];
 }
+

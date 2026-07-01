@@ -1,10 +1,28 @@
 import Button from "../Button/Button";
 import css from "./LoginForm.module.css";
 import "@/app/globals.css";
+import { useForm } from "react-hook-form";
+import type { LoginData } from "@/types/types";
 
-const LoginForm = () => {
+interface LoginFormProps {
+  handleLogin: (data: LoginData) => Promise<void>;
+}
+
+const LoginForm = ({ handleLogin }: LoginFormProps) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<LoginData>();
+
+  const onSubmit = async (data: LoginData) => {
+    await handleLogin(data);
+    reset();
+  };
+
   return (
-    <form className={css.form}>
+    <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
       <h3 className={css.title}>Log In</h3>
       <p className={css.description}>
         Welcome back! Please enter your credentials to access your account and
@@ -21,6 +39,9 @@ const LoginForm = () => {
         required
         minLength={3}
         className={css.input}
+        {...register("email", {
+          required: "Email is required",
+        })}
       />
       <label htmlFor="password" className="visuallyHidden">
         Password
@@ -32,6 +53,9 @@ const LoginForm = () => {
         required
         minLength={3}
         className={`${css.input} ${css.inputS}`}
+        {...register("password", {
+          required: "Password is required",
+        })}
       />
       <Button style="auth">Log In</Button>
     </form>

@@ -7,13 +7,23 @@ import LoginForm from "@/components/LoginForm/LoginForm";
 import RegistrationForm from "@/components/RegistrationForm/RegistrationForm";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { registration } from "@/services/auth";
+import { registration, login } from "@/services/auth";
+import type { RegistrationData, LoginData } from "@/types/types";
 
 const AuthNavigation = () => {
   const pathname = usePathname();
   const [modalType, setModalType] = useState<"login" | "registration" | null>(
     null,
   );
+
+  const handleRegistration = async (data: RegistrationData) => {
+    await registration(data);
+  };
+
+  const handleLogin = async (data: LoginData) => {
+    await login(data);
+    setModalType(null);
+  };
 
   return (
     <div className={css.authActions}>
@@ -44,9 +54,9 @@ const AuthNavigation = () => {
       {modalType && (
         <Modal onClose={() => setModalType(null)}>
           {modalType === "login" ? (
-            <LoginForm />
+            <LoginForm handleLogin={handleLogin} />
           ) : (
-            <RegistrationForm registration={registration} />
+            <RegistrationForm handleRegistration={handleRegistration} />
           )}
         </Modal>
       )}

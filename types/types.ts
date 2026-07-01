@@ -1,3 +1,5 @@
+import { User } from "firebase/auth";
+
 export interface Review {
   comment: string;
   rating: number;
@@ -26,8 +28,22 @@ export interface RegistrationData {
   password: string;
 }
 
-export interface User {
-  username: string;
+export interface LoginData {
   email: string;
   password: string;
 }
+
+export type UserState = {
+  user: User | null;
+  loading: boolean;
+
+  setUser: (user: User | null) => void;
+  setLoading: (loading: boolean) => void;
+};
+
+export type Profile = {
+  username: string;
+  email: string;
+  favorites: Record<string, boolean>;
+  photoURL?: string;
+};

@@ -3,6 +3,7 @@ import { Arimo } from "next/font/google";
 import "./globals.css";
 import "modern-normalize";
 import Header from "@/components/Header/Header";
+import AuthProvider from "@/components/AuthProvider/AuthProvider";
 
 const arimo = Arimo({
   variable: "--font-arimo",
@@ -22,8 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={arimo.variable}>
       <body>
-        <Header />
-        <main>{children}</main>
+        <AuthProvider>
+          <Header />
+          <main>{children}</main>
+        </AuthProvider>
       </body>
     </html>
   );

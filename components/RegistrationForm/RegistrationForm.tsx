@@ -5,10 +5,10 @@ import type { RegistrationData } from "@/types/types";
 import { useForm } from "react-hook-form";
 
 interface RegistrationFormProps {
-  registration: (data: RegistrationData) => Promise<void>;
+  handleRegistration: (data: RegistrationData) => Promise<void>;
 }
 
-const RegistrationForm = ({ registration }: RegistrationFormProps) => {
+const RegistrationForm = ({ handleRegistration }: RegistrationFormProps) => {
   const {
     register,
     handleSubmit,
@@ -17,7 +17,7 @@ const RegistrationForm = ({ registration }: RegistrationFormProps) => {
   } = useForm<RegistrationData>();
 
   const onSubmit = async (data: RegistrationData) => {
-    await registration(data);
+    await handleRegistration(data);
     reset();
   };
 
@@ -28,7 +28,7 @@ const RegistrationForm = ({ registration }: RegistrationFormProps) => {
         Thank you for your interest in our platform! In order to register, we
         need some information. Please provide us with the following information.
       </p>
-      <label htmlFor="username" className={css.visuallyHidden}>
+      <label htmlFor="username" className="visuallyHidden">
         Name
       </label>
       <input
