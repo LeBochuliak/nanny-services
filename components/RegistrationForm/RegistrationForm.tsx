@@ -3,6 +3,8 @@ import css from "./RegistrationForm.module.css";
 import "@/app/globals.css";
 import type { RegistrationData } from "@/types/types";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { RegistrationFormSchema } from "@/services/validation";
 
 interface RegistrationFormProps {
   handleRegistration: (data: RegistrationData) => Promise<void>;
@@ -14,7 +16,9 @@ const RegistrationForm = ({ handleRegistration }: RegistrationFormProps) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<RegistrationData>();
+  } = useForm<RegistrationData>({
+    resolver: yupResolver(RegistrationFormSchema),
+  });
 
   const onSubmit = async (data: RegistrationData) => {
     await handleRegistration(data);
@@ -31,6 +35,7 @@ const RegistrationForm = ({ handleRegistration }: RegistrationFormProps) => {
       <label htmlFor="username" className="visuallyHidden">
         Name
       </label>
+      <p>{errors.username?.message}</p>
       <input
         id="username"
         type="text"
@@ -38,14 +43,13 @@ const RegistrationForm = ({ handleRegistration }: RegistrationFormProps) => {
         required
         minLength={3}
         className={css.input}
-        {...register("username", {
-          required: "Username is required",
-        })}
+        {...register("username")}
       />
-      {errors.username && <p>Name is required.</p>}
+
       <label htmlFor="email" className="visuallyHidden">
         Email
       </label>
+      <p>{errors.email?.message}</p>
       <input
         type="email"
         id="email"
@@ -54,14 +58,13 @@ const RegistrationForm = ({ handleRegistration }: RegistrationFormProps) => {
         required
         minLength={3}
         className={css.input}
-        {...register("email", {
-          required: "Email is required",
-        })}
+        {...register("email")}
       />
+
       <label htmlFor="password" className="visuallyHidden">
         Password
       </label>
-      {errors.password && <p>Minimum 6 characters</p>}
+      <p>{errors.password?.message}</p>
       <input
         type="text"
         id="password"
@@ -69,13 +72,7 @@ const RegistrationForm = ({ handleRegistration }: RegistrationFormProps) => {
         required
         minLength={3}
         className={`${css.input} ${css.inputS}`}
-        {...register("password", {
-          required: "Password is required",
-          minLength: {
-            value: 6,
-            message: "Minimum 6 characters",
-          },
-        })}
+        {...register("password")}
       />
 
       <Button style="auth" type="submit">

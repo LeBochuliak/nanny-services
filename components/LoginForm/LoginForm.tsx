@@ -3,6 +3,8 @@ import css from "./LoginForm.module.css";
 import "@/app/globals.css";
 import { useForm } from "react-hook-form";
 import type { LoginData } from "@/types/types";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { LoginFormSchema } from "@/services/validation";
 
 interface LoginFormProps {
   handleLogin: (data: LoginData) => Promise<void>;
@@ -14,7 +16,9 @@ const LoginForm = ({ handleLogin }: LoginFormProps) => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<LoginData>();
+  } = useForm<LoginData>({
+    resolver: yupResolver(LoginFormSchema),
+  });
 
   const onSubmit = async (data: LoginData) => {
     await handleLogin(data);
@@ -31,6 +35,7 @@ const LoginForm = ({ handleLogin }: LoginFormProps) => {
       <label htmlFor="email" className="visuallyHidden">
         Email
       </label>
+      <p>{errors.email?.message}</p>
       <input
         type="email"
         id="email"
@@ -39,13 +44,13 @@ const LoginForm = ({ handleLogin }: LoginFormProps) => {
         required
         minLength={3}
         className={css.input}
-        {...register("email", {
-          required: "Email is required",
-        })}
+        {...register("email")}
       />
+
       <label htmlFor="password" className="visuallyHidden">
         Password
       </label>
+      <p>{errors.password?.message}</p>
       <input
         type="text"
         id="password"
@@ -53,10 +58,9 @@ const LoginForm = ({ handleLogin }: LoginFormProps) => {
         required
         minLength={3}
         className={`${css.input} ${css.inputS}`}
-        {...register("password", {
-          required: "Password is required",
-        })}
+        {...register("password")}
       />
+
       <Button style="auth">Log In</Button>
     </form>
   );
