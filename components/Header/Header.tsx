@@ -25,17 +25,36 @@ const Header = () => {
         Nanny.Services
       </Link>
       <nav className={css.nav}>
-        <Link href="/" className={css.navLink}>
+        <Link
+          href="/"
+          className={
+            pathname === "/" ? `${css.navLink} ${css.active}` : `${css.navLink}`
+          }
+        >
           Home
         </Link>
-        <Link href="/nannies" className={css.navLink}>
+        <Link
+          href="/nannies"
+          className={
+            pathname === "/nannies"
+              ? `${css.navLink} ${css.active}`
+              : `${css.navLink}`
+          }
+        >
           Nannies
         </Link>
         {!user ? (
           <AuthNavigation />
         ) : (
           <div className={css.userActions}>
-            <Link href="/nannies" className={css.navLink}>
+            <Link
+              href="/nannies"
+              className={
+                pathname === "/favorites"
+                  ? `${css.navLink} ${css.active}`
+                  : `${css.navLink}`
+              }
+            >
               Favorites
             </Link>
             <Link href="/profile" className={css.avatarLink}>
@@ -44,7 +63,7 @@ const Header = () => {
               </svg>
               <p>{profile?.username}</p>
             </Link>
-            <Button type="button" style="primary" onClick={handleLogout}>
+            <Button type="button" styleName="primary" onClick={handleLogout}>
               Log out
             </Button>
           </div>

@@ -44,7 +44,8 @@
 .secondary:hover,
 .secondary:focus,
 .auth:hover,
-.auth:focus {
+.auth:focus,
+.load:hover{
     background-color: rgba(251, 251, 251);
     color: #000000;
     border: 1px solid #103931;
@@ -66,4 +67,11 @@
     padding: 16px;
     width: 100%;
     border: 1px solid transparent;
+}
+
+.load {
+    background-color: #103931;
+    padding: 14px 40px;
+    border: 1px solid transparent;
+    margin: 64px auto;
 }

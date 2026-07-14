@@ -75,7 +75,7 @@ const RegistrationForm = ({ handleRegistration }: RegistrationFormProps) => {
         {...register("password")}
       />
 
-      <Button style="auth" type="submit">
+      <Button styleName="auth" type="submit">
         Sign Up
       </Button>
     </form>

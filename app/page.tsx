@@ -18,7 +18,7 @@ const Home = () => {
           </span>
         </h1>
         <Button
-          style="primary"
+          styleName="primary"
           type="button"
           onClick={() => router.push("/nannies")}
           home

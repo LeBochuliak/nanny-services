@@ -123,7 +123,7 @@ const Card = ({ nanny }: CardProps) => {
             ) : (
               <p className={css.description}>There are no reviews yet.</p>
             )}
-            <Button type="button" style="secondary" onClick={openModal}>
+            <Button type="button" styleName="secondary" onClick={openModal}>
               Make an appointment
             </Button>
           </>

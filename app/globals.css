@@ -63,6 +63,8 @@ ul {
 
 .container {
   margin: 64px 128px;
+  display: flex;
+  flex-direction: column;
 }
 .visuallyHidden {
   position: absolute;

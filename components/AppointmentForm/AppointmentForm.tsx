@@ -139,7 +139,7 @@ const AppointmentForm = () => {
         placeholder="Comment"
         className={`${css.input} ${css.commentInput}`}
       />
-      <Button type="submit" style="auth">
+      <Button type="submit" styleName="auth">
         Send
       </Button>
     </form>

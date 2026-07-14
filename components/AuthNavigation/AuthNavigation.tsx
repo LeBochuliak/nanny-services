@@ -29,7 +29,7 @@ const AuthNavigation = () => {
     <div className={css.authActions}>
       <Button
         type="button"
-        style="primary"
+        styleName="primary"
         onClick={() => setModalType("login")}
       >
         Log In
@@ -37,7 +37,7 @@ const AuthNavigation = () => {
       {pathname === "/" ? (
         <Button
           type="button"
-          style="secondary"
+          styleName="secondary"
           onClick={() => setModalType("registration")}
         >
           Registration
@@ -45,7 +45,7 @@ const AuthNavigation = () => {
       ) : (
         <Button
           type="button"
-          style="header"
+          styleName="header"
           onClick={() => setModalType("registration")}
         >
           Registration

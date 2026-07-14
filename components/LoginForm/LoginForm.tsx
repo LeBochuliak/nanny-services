@@ -61,7 +61,7 @@ const LoginForm = ({ handleLogin }: LoginFormProps) => {
         {...register("password")}
       />
 
-      <Button style="auth">Log In</Button>
+      <Button styleName="auth">Log In</Button>
     </form>
   );
 };

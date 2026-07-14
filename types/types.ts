@@ -47,3 +47,14 @@ export type Profile = {
   favorites: Record<string, boolean>;
   photoURL?: string;
 };
+
+export type Sort =
+  | "AtoZ"
+  | "ZtoA"
+  | "popular"
+  | "notPopular";
+
+export type Cursor = {
+  value: string | number;
+  key: string;
+};
