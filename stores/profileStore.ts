@@ -4,10 +4,18 @@ import type { Profile } from "@/types/types"
 type UserProfileState = {
   profile: Profile | null;
   setProfile: (profile: Profile | null) => void;
+  setFavorites: (favorites: string[]) => void;
 };
 
 export const useUserProfile = create<UserProfileState>()(set => ({
   profile: null,
 
   setProfile: profile => set({ profile }),
+
+  setFavorites: favorites =>
+    set(state => ({
+      profile: state.profile
+        ? { ...state.profile, favorites }
+        : null,
+    })),
 }));

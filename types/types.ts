@@ -44,7 +44,7 @@ export type UserState = {
 export type Profile = {
   username: string;
   email: string;
-  favorites: Record<string, boolean>;
+  favorites: string[];
   photoURL?: string;
 };
 

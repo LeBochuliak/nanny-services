@@ -5,9 +5,16 @@ import Image from "next/image";
 import Button from "@/components/Button/Button";
 import Modal from "@/components/Modal/Modal";
 import AppointmentForm from "@/components/AppointmentForm/AppointmentForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Nanny } from "@/types/types";
 import ReviewsList from "@/components/ReviewsList/ReviewsList";
+import {
+  addToFavorites,
+  removeFavorite,
+  getFavorites,
+} from "@/services/profile";
+import { useUser } from "@/stores/userStore";
+import { useUserProfile } from "@/stores/profileStore";
 
 interface CardProps {
   nanny: Nanny;
@@ -16,6 +23,8 @@ interface CardProps {
 const Card = ({ nanny }: CardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showReviews, setShowReviews] = useState(false);
+  const { user } = useUser();
+  const { profile, setFavorites } = useUserProfile();
 
   const openModal = () => setIsModalOpen(true);
 
@@ -39,6 +48,30 @@ const Card = ({ nanny }: CardProps) => {
     return age;
   }
 
+  useEffect(() => {
+    const loadFavorites = async () => {
+      if (!user) return;
+
+      const favorites = await getFavorites(user.uid);
+      setFavorites(favorites);
+    };
+
+    loadFavorites();
+  }, [user, setFavorites]);
+
+  const handleFavorite = async () => {
+    if (!user) return;
+    if (!profile) return;
+
+    if (profile.favorites.includes(nanny.id)) {
+      await removeFavorite(user.uid, nanny.id);
+      setFavorites(profile.favorites.filter((id) => id !== nanny.id));
+    } else {
+      await addToFavorites(user.uid, nanny.id);
+      setFavorites([...profile.favorites, nanny.id]);
+    }
+  };
+
   return (
     <div className={css.cardContainer}>
       <ul className={css.infoAddList}>
@@ -60,7 +93,7 @@ const Card = ({ nanny }: CardProps) => {
           </p>
         </li>
       </ul>
-      <button className={css.likeBtn}>
+      <button className={css.likeBtn} type="button" onClick={handleFavorite}>
         <svg width="26" height="26" className={css.heart}>
           <use href="/sprite.svg#icon-heart" />
         </svg>
