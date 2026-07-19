@@ -15,10 +15,9 @@ import clsx from "clsx";
 
 interface CardProps {
   nanny: Nanny;
-  onRemoveFavorite?: (id: string) => void;
 }
 
-const Card = ({ nanny, onRemoveFavorite }: CardProps) => {
+const Card = ({ nanny }: CardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showReviews, setShowReviews] = useState(false);
   const { user } = useUser();
@@ -47,16 +46,27 @@ const Card = ({ nanny, onRemoveFavorite }: CardProps) => {
   }
 
   const handleFavorite = async () => {
-    if (!user) return;
-    if (!profile) return;
+    if (!user || !profile) return;
 
-    if (profile.favorites.includes(nanny.id)) {
+    const isFavorite = profile.favorites.some(
+      (favorite) => favorite.id === nanny.id,
+    );
+
+    if (isFavorite) {
       await removeFavorite(user.uid, nanny.id);
-      setFavorites(profile.favorites.filter((id) => id !== nanny.id));
-      onRemoveFavorite?.(nanny.id);
+
+      setFavorites(
+        profile.favorites.filter((favorite) => favorite.id !== nanny.id),
+      );
     } else {
-      await addToFavorites(user.uid, nanny.id);
-      setFavorites([...profile.favorites, nanny.id]);
+      const favoriteNanny = {
+        id: nanny.id,
+        name: nanny.name,
+      };
+
+      await addToFavorites(user.uid, favoriteNanny);
+
+      setFavorites([...profile.favorites, favoriteNanny]);
     }
   };
 
@@ -87,7 +97,8 @@ const Card = ({ nanny, onRemoveFavorite }: CardProps) => {
           height="26"
           className={clsx(
             css.heart,
-            profile?.favorites.includes(nanny?.id) === true && css.active,
+            profile?.favorites.some((favorite) => favorite.id === nanny?.id) &&
+              css.active,
           )}
         >
           <use href="/sprite.svg#icon-heart" />

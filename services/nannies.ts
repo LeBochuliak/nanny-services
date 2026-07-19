@@ -94,7 +94,7 @@ export async function getNannies(sort: Sort, cursor?: Cursor | null): Promise<Ge
       ? items[0]
       : items[items.length - 1];
 
-  cursor = cursorItem
+  cursor = cursorItem 
       ? {
         value: cursorItem[sortKey],
         key: cursorItem.id,

@@ -1,5 +1,6 @@
 import { db } from "@/lib/firebase";
 import { get, ref, set, remove } from "firebase/database";
+import type { FavoriteNanny } from "@/types/types"
 
 export async function getProfile(uid: string) {
   const snapshot = await get(ref(db, `users/${uid}`));;
@@ -12,18 +13,19 @@ export async function getProfile(uid: string) {
 
   return {
     ...profile,
-    favorites: Object.keys(profile.favorites ?? {}),
+    favorites: Object.values(profile.favorites ?? {}),
   };
 }
 
 
 export async function addToFavorites(
   userId: string,
-  nannyId: string
+  nanny: FavoriteNanny
+
 ) {
   await set(
-    ref(db, `users/${userId}/favorites/${nannyId}`),
-    true
+    ref(db, `users/${userId}/favorites/${nanny.id}`),
+    nanny
   );
   
 }
@@ -42,9 +44,12 @@ export const getFavorites = async (userId: string) => {
     ref(db, `users/${userId}/favorites`)
   );
 
+  const profile = snapshot.val();
+
   if (snapshot.exists()) {
-    return Object.keys(snapshot.val());
+    return Object.values(profile.favorites ?? {});
   }
 
+  
   return [];
 };

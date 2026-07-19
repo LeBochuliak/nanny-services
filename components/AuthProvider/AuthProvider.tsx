@@ -18,7 +18,7 @@ export default function AuthProvider({
   const setLoading = useUser((state) => state.setLoading);
   const { loading } = useUser();
   const { user } = useUser();
-  const { setProfile, setFavorites } = useUserProfile();
+  const { profile, setProfile } = useUserProfile();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -37,17 +37,6 @@ export default function AuthProvider({
 
     return unsubscribe;
   }, [setUser, setLoading, user, setProfile]);
-
-  useEffect(() => {
-    const loadFavorites = async () => {
-      if (!user) return;
-
-      const favorites = await getFavorites(user.uid);
-      setFavorites(favorites);
-    };
-
-    loadFavorites();
-  }, [user, setFavorites]);
 
   if (loading) {
     return (

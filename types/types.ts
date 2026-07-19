@@ -41,10 +41,15 @@ export type UserState = {
   setLoading: (loading: boolean) => void;
 };
 
+export type FavoriteNanny = {
+  id: string;
+  name: string;
+}
+
 export type Profile = {
   username: string;
   email: string;
-  favorites: string[];
+  favorites: FavoriteNanny[];
   photoURL?: string;
 };
 
