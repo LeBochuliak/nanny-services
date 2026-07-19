@@ -8,7 +8,12 @@ export async function getProfile(uid: string) {
     return [];
   }
 
-  return snapshot.val();
+  const profile = snapshot.val();
+
+  return {
+    ...profile,
+    favorites: Object.keys(profile.favorites ?? {}),
+  };
 }
 
 

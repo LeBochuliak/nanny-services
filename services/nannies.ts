@@ -112,3 +112,35 @@ export async function getNannies(sort: Sort, cursor?: Cursor | null): Promise<Ge
   };
 }
 
+export const getFavoriteNannies = async (ids: string[], start: number, end: number) => {
+
+
+  const idsToLoad = ids.slice(start, end);
+  const nextIdsToLoad = ids.slice(start + 3, end + 3);
+  let hasMore: boolean = true;
+
+  if (nextIdsToLoad.length === 0 ) {
+    hasMore = false;
+  }
+  
+  const nannies = await Promise.all(
+    idsToLoad.map(async id => {
+      const snapshot = await get(ref(db, `nannies/${id}`));
+
+      if (!snapshot.exists()) {
+        return null;
+      }
+
+      return {
+        id,
+        ...snapshot.val(),
+      };
+    })
+  );
+
+  return {
+    nannies: nannies.filter(Boolean),
+    hasMore
+   }
+
+};

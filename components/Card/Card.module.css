@@ -128,7 +128,16 @@
     stroke: #11101c;
     fill: transparent;
 }
- .heart:active {
+ .heart:hover {
     fill: #11101c;
  }
+
+  .heart.active{
+    fill: #11101c;
+  }
+
+  .heart.active:hover {
+    stroke: #11101c;
+    fill: transparent;
+  }
 

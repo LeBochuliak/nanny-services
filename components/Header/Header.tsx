@@ -48,7 +48,7 @@ const Header = () => {
         ) : (
           <div className={css.userActions}>
             <Link
-              href="/nannies"
+              href="/favorites"
               className={
                 pathname === "/favorites"
                   ? `${css.navLink} ${css.active}`

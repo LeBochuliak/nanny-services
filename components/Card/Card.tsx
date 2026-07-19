@@ -5,22 +5,20 @@ import Image from "next/image";
 import Button from "@/components/Button/Button";
 import Modal from "@/components/Modal/Modal";
 import AppointmentForm from "@/components/AppointmentForm/AppointmentForm";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { Nanny } from "@/types/types";
 import ReviewsList from "@/components/ReviewsList/ReviewsList";
-import {
-  addToFavorites,
-  removeFavorite,
-  getFavorites,
-} from "@/services/profile";
+import { addToFavorites, removeFavorite } from "@/services/profile";
 import { useUser } from "@/stores/userStore";
 import { useUserProfile } from "@/stores/profileStore";
+import clsx from "clsx";
 
 interface CardProps {
   nanny: Nanny;
+  onRemoveFavorite?: (id: string) => void;
 }
 
-const Card = ({ nanny }: CardProps) => {
+const Card = ({ nanny, onRemoveFavorite }: CardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showReviews, setShowReviews] = useState(false);
   const { user } = useUser();
@@ -48,17 +46,6 @@ const Card = ({ nanny }: CardProps) => {
     return age;
   }
 
-  useEffect(() => {
-    const loadFavorites = async () => {
-      if (!user) return;
-
-      const favorites = await getFavorites(user.uid);
-      setFavorites(favorites);
-    };
-
-    loadFavorites();
-  }, [user, setFavorites]);
-
   const handleFavorite = async () => {
     if (!user) return;
     if (!profile) return;
@@ -66,6 +53,7 @@ const Card = ({ nanny }: CardProps) => {
     if (profile.favorites.includes(nanny.id)) {
       await removeFavorite(user.uid, nanny.id);
       setFavorites(profile.favorites.filter((id) => id !== nanny.id));
+      onRemoveFavorite?.(nanny.id);
     } else {
       await addToFavorites(user.uid, nanny.id);
       setFavorites([...profile.favorites, nanny.id]);
@@ -94,7 +82,14 @@ const Card = ({ nanny }: CardProps) => {
         </li>
       </ul>
       <button className={css.likeBtn} type="button" onClick={handleFavorite}>
-        <svg width="26" height="26" className={css.heart}>
+        <svg
+          width="26"
+          height="26"
+          className={clsx(
+            css.heart,
+            profile?.favorites.includes(nanny?.id) === true && css.active,
+          )}
+        >
           <use href="/sprite.svg#icon-heart" />
         </svg>
       </button>

@@ -7,7 +7,7 @@ import { useUser } from "@/stores/userStore";
 import { ClipLoader } from "react-spinners";
 import cssLoader from "@/components/Loader/Loader.module.css";
 import { useUserProfile } from "@/stores/profileStore";
-import { getProfile } from "@/services/profile";
+import { getProfile, getFavorites } from "@/services/profile";
 
 export default function AuthProvider({
   children,
@@ -18,7 +18,7 @@ export default function AuthProvider({
   const setLoading = useUser((state) => state.setLoading);
   const { loading } = useUser();
   const { user } = useUser();
-  const { setProfile } = useUserProfile();
+  const { setProfile, setFavorites } = useUserProfile();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -37,6 +37,17 @@ export default function AuthProvider({
 
     return unsubscribe;
   }, [setUser, setLoading, user, setProfile]);
+
+  useEffect(() => {
+    const loadFavorites = async () => {
+      if (!user) return;
+
+      const favorites = await getFavorites(user.uid);
+      setFavorites(favorites);
+    };
+
+    loadFavorites();
+  }, [user, setFavorites]);
 
   if (loading) {
     return (
