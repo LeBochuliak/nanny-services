@@ -13,10 +13,11 @@ import { useUserProfile } from "@/stores/profileStore";
 const Header = () => {
   const pathname = usePathname();
   const { user } = useUser();
-  const { profile } = useUserProfile();
+  const { profile, setProfile } = useUserProfile();
 
   const handleLogout = async () => {
     await logout();
+    setProfile(null);
   };
 
   return (

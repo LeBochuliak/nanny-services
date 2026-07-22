@@ -1,21 +1,22 @@
 import { create } from 'zustand';
-import type { Profile, FavoriteNanny} from "@/types/types"
+import type { Profile} from "@/types/types"
 
 type UserProfileState = {
   profile: Profile | null;
   setProfile: (profile: Profile | null) => void;
-  setFavorites: (favorites: FavoriteNanny[]) => void;
+  updateProfile: (updates: Partial<Profile>) => void;
 };
 
 export const useUserProfile = create<UserProfileState>()(set => ({
   profile: null,
 
   setProfile: profile => set({ profile }),
+  
+  updateProfile: updates =>
+  set(state => ({
+    profile: state.profile
+      ? { ...state.profile, ...updates }
+      : null,
+  })),
 
-  setFavorites: favorites =>
-    set(state => ({
-      profile: state.profile
-        ? { ...state.profile, favorites }
-        : null,
-    })),
 }));

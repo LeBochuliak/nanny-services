@@ -10,7 +10,7 @@ export async function getProfile(uid: string) {
   }
 
   const profile = snapshot.val();
-
+  
   return {
     ...profile,
     favorites: Object.values(profile.favorites ?? {}),

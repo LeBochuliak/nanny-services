@@ -21,7 +21,7 @@ const Card = ({ nanny }: CardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showReviews, setShowReviews] = useState(false);
   const { user } = useUser();
-  const { profile, setFavorites } = useUserProfile();
+  const { profile, updateProfile } = useUserProfile();
 
   const openModal = () => setIsModalOpen(true);
 
@@ -48,16 +48,17 @@ const Card = ({ nanny }: CardProps) => {
   const handleFavorite = async () => {
     if (!user || !profile) return;
 
-    const isFavorite = profile.favorites.some(
-      (favorite) => favorite.id === nanny.id,
-    );
+    const isFavorite =
+      profile.favorites.some((favorite) => favorite.id === nanny.id) || false;
 
     if (isFavorite) {
       await removeFavorite(user.uid, nanny.id);
 
-      setFavorites(
-        profile.favorites.filter((favorite) => favorite.id !== nanny.id),
-      );
+      updateProfile({
+        favorites: profile.favorites.filter(
+          (favorite) => favorite.id !== nanny.id,
+        ),
+      });
     } else {
       const favoriteNanny = {
         id: nanny.id,
@@ -66,7 +67,7 @@ const Card = ({ nanny }: CardProps) => {
 
       await addToFavorites(user.uid, favoriteNanny);
 
-      setFavorites([...profile.favorites, favoriteNanny]);
+      updateProfile({ favorites: [...profile.favorites, favoriteNanny] });
     }
   };
 
@@ -97,7 +98,7 @@ const Card = ({ nanny }: CardProps) => {
           height="26"
           className={clsx(
             css.heart,
-            profile?.favorites.some((favorite) => favorite.id === nanny?.id) &&
+            profile?.favorites?.some((favorite) => favorite.id === nanny?.id) &&
               css.active,
           )}
         >

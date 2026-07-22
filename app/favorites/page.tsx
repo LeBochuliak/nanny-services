@@ -6,6 +6,7 @@ import { useUserProfile } from "@/stores/profileStore";
 import Card from "@/components/Card/Card";
 import Button from "@/components/Button/Button";
 import type { Nanny } from "@/types/types";
+import EmptyBox from "@/components/EmptyBox/EmptyBox";
 
 const Favorites = () => {
   const { profile } = useUserProfile();
@@ -53,9 +54,16 @@ const Favorites = () => {
 
   return (
     <div className="container">
-      {favoriteNannies.map((nanny) => (
-        <Card key={nanny.id} nanny={nanny} />
-      ))}
+      {favoriteNannies.length === 0 ? (
+        <EmptyBox
+          title="No favorite nannies yet."
+          text="Add nannies to your favorites to find them quickly later."
+          linkText="Find a Nanny"
+          link="/nannies"
+        />
+      ) : (
+        favoriteNannies.map((nanny) => <Card key={nanny.id} nanny={nanny} />)
+      )}
       {hasMore && (
         <Button styleName="load" type="button" onClick={loadMore}>
           Load more

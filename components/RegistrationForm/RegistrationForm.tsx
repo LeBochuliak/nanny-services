@@ -5,12 +5,16 @@ import type { RegistrationData } from "@/types/types";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { RegistrationFormSchema } from "@/services/validation";
+import { useUserProfile } from "@/stores/profileStore";
+import { update } from "firebase/database";
 
 interface RegistrationFormProps {
   handleRegistration: (data: RegistrationData) => Promise<void>;
 }
 
 const RegistrationForm = ({ handleRegistration }: RegistrationFormProps) => {
+  const { updateProfile } = useUserProfile();
+
   const {
     register,
     handleSubmit,
@@ -22,6 +26,7 @@ const RegistrationForm = ({ handleRegistration }: RegistrationFormProps) => {
 
   const onSubmit = async (data: RegistrationData) => {
     await handleRegistration(data);
+    updateProfile({ username: data.username, favorites: [] });
     reset();
   };
 

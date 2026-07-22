@@ -18,6 +18,7 @@ const AuthNavigation = () => {
 
   const handleRegistration = async (data: RegistrationData) => {
     await registration(data);
+    setModalType(null);
   };
 
   const handleLogin = async (data: LoginData) => {
